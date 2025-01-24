@@ -2,35 +2,36 @@
 import Logo from "~/components/shop/Logo.vue";
 import SearchBar from "~/components/shop/SearchBar.vue";
 
-type LogoProps = {
-  text?: string;
-  color?: string;
+defineExpose({ changeValues });
+const values = reactive({
+  text: "",
+  color: "text-black"
+});
+function changeValues(text: string = '', color: string = "text-black") {
+  values.text = text;
+  values.color = color;
 }
-
-const props = defineProps<LogoProps>();
-
-
 </script>
 
 <template>
   <header>
-    <div class="border-b shadow w-full flex justify-around gap-4 p-4 items-center">
+    <div class="border-b shadow w-full p-4 grid grid-cols-3 justify-items-center">
       <div id="logo">
         <nuxt-link to="/">
-          <Logo v-if="!text"/>
-          <h1 :class="[color]" v-else>{{ text }}</h1>
+          <Transition name="fade" mode="out-in">
+            <Logo v-if="!values.text"/>
+            <h1 class="text-4xl font-extrabold" :class="[values.color]" v-else>{{ values.text }}</h1>
+          </Transition>
         </nuxt-link>
       </div>
-      <SearchBar class="grow"/>
+      <SearchBar/>
       <div id="extras" class="flex gap-4 items-center">
-        <NuxtLink to="/carrito" class="group flex flex-col items-center hover:text-yellow-500">
-          <Icon size="1.3em" name="lucide:shopping-cart"/>
-          <p>Carrito</p>
-        </NuxtLink>
-        <NuxtLink to="/favoritos" class="group flex flex-col items-center hover:text-red-500">
-          <Icon size="1.3em" name="lucide:heart" </Icon>
-          <p>Favoritos</p>
-        </NuxtLink>
+        <nuxt-link @mouseenter="changeValues('Carrito', 'text-yellow-500')" @mouseleave="changeValues()" to="/carrito" class="group flex flex-col items-center hover:text-yellow-500">
+          <Icon size="2em" name="lucide:shopping-cart"/>
+        </nuxt-link>
+        <nuxt-link @mouseenter="changeValues('Favoritos', 'text-red-500')" @mouseleave="changeValues()" to="/favoritos" class="group flex flex-col items-center hover:text-red-500">
+          <Icon size="2em" name="lucide:heart"/>
+        </nuxt-link>
       </div>
     </div>
   </header>
@@ -38,7 +39,7 @@ const props = defineProps<LogoProps>();
 
 <style>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 
 .fade-enter-from, .fade-leave-to {
