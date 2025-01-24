@@ -27,7 +27,7 @@ function changeValues(text: string = '', color: string = "text-black") {
       <SearchBar/>
       <div id="extras" class="flex gap-4 items-center">
         <nuxt-link @mouseenter="changeValues('Carrito', 'text-yellow-500')" @mouseleave="changeValues()" to="/carrito" class="group flex flex-col items-center hover:text-yellow-500">
-          <Icon size="2em" name="lucide:shopping-cart"/>
+          <Icon size="2em" name="lucide:shopping-bag"/>
         </nuxt-link>
         <nuxt-link @mouseenter="changeValues('Favoritos', 'text-red-500')" @mouseleave="changeValues()" to="/favoritos" class="group flex flex-col items-center hover:text-red-500">
           <Icon size="2em" name="lucide:heart"/>

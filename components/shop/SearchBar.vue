@@ -3,7 +3,8 @@
 </script>
 
 <template>
-  <div>
+  <div class="relative">
+    <Icon name="lucide:search" class="absolute left-2 top-3 text-muted-foreground"></Icon>
     <Input
         type="search"
         placeholder="¿Qué necesitas para brillar?"
